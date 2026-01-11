@@ -3,15 +3,17 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
-
+    //Variables from PlayerStats.cs
     private PlayerStats stats;
 
     //Field Variables
     private Vector2 moveInput;
   
-
     //Components
     private Rigidbody2D rBody; //Field Variable
+
+    //Sidequest 1
+    public ParticleSystem landExplosion;
 
 
     void Awake()
@@ -23,20 +25,28 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    void OnMove(InputValue value)
-    {
-        moveInput = value.Get<Vector2>();
-    }
-
     void FixedUpdate()
     {
         ApplyMovement();
     }
 
+    //Method Declarations
     void ApplyMovement()
     {
       float velocityX = moveInput.x;
 
     rBody.linearVelocity = new Vector2(velocityX, rBody.linearVelocity.y);
+    }
+    void OnMove(InputValue value)
+    {
+        moveInput = value.Get<Vector2>();
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            landExplosion.Play();
+        }
     }
 }
