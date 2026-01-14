@@ -26,7 +26,7 @@ public class PlayerController : MonoBehaviour
         // Initialize
         rBody = GetComponent<Rigidbody2D>();
         stats = new PlayerStats();
-        int something = stats.MoveSpeed;
+        
         
 
     }

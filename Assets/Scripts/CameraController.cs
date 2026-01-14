@@ -3,7 +3,8 @@ using UnityEngine;
 public class CameraController : MonoBehaviour
 {
     private Vector3 offset = new Vector3(0, 0, -10);
-    private float smoothTime = 0.50f;
+    private CameraStats stats;
+    private float smoothTime;
     private Vector3 velocity = Vector3.zero;
     public GameObject player;
     
@@ -14,9 +15,10 @@ public class CameraController : MonoBehaviour
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    void Awake()
     {
-       
+        stats = new CameraStats();
+        smoothTime = stats.FloatSpeed;
     }
 
     // Update is called once per frame
