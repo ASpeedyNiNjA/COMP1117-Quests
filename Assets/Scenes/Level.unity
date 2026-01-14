@@ -1346,6 +1346,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   landExplosion: {fileID: 1943801419}
   superSpeed: 0
+  superSpeedDuration: 3
 --- !u!1001 &1128065566
 PrefabInstance:
   m_ObjectHideFlags: 0

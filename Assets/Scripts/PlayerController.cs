@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -17,6 +18,7 @@ public class PlayerController : MonoBehaviour
 
     //Sidequest 2
     public bool superSpeed = false;
+    public int superSpeedDuration;
 
 
     void Awake()
@@ -25,6 +27,7 @@ public class PlayerController : MonoBehaviour
         rBody = GetComponent<Rigidbody2D>();
         stats = new PlayerStats();
         int something = stats.MoveSpeed;
+        
 
     }
 
@@ -54,14 +57,17 @@ public class PlayerController : MonoBehaviour
     }
     void SuperMovement()
     {
+        StartCoroutine(SupermoveSlowdown());
         float velocityX = moveInput.x;
-
         rBody.linearVelocity = new Vector2(velocityX * 5, rBody.linearVelocity.y);
     }
-    void OnMove(InputValue value)
+
+    IEnumerator SupermoveSlowdown()
     {
-        moveInput = value.Get<Vector2>();
+        yield return new WaitForSeconds(superSpeedDuration);
+        superSpeed = false;
     }
+
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -80,5 +86,17 @@ public class PlayerController : MonoBehaviour
         {
             superSpeed = true;
         }
+    }
+
+
+
+
+
+
+
+
+    void OnMove(InputValue value)
+    {
+        moveInput = value.Get<Vector2>();
     }
 }
