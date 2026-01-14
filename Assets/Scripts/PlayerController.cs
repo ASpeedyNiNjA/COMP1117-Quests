@@ -30,7 +30,13 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
-        if(superSpeed == true)
+        Movement();
+    }
+
+    //Method Declarations
+    void Movement()
+    {
+        if (superSpeed)
         {
             SuperMovement();
         }
@@ -39,8 +45,7 @@ public class PlayerController : MonoBehaviour
             ApplyMovement();
         }
     }
-
-    //Method Declarations
+    
     void ApplyMovement()
     {
       float velocityX = moveInput.x;
