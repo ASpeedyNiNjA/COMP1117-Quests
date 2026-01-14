@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class CameraStats
 {
-    private int floatSpeed;
-    public int FloatSpeed
+    private float floatSpeed = 0.5f;
+    public float FloatSpeed
     {
         get { return floatSpeed; }
     }
