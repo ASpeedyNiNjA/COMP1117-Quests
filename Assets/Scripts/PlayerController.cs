@@ -15,6 +15,9 @@ public class PlayerController : MonoBehaviour
     //Sidequest 1
     public ParticleSystem landExplosion;
 
+    //Sidequest 2
+    public bool superSpeed = false;
+
 
     void Awake()
     {
@@ -27,7 +30,14 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
-        ApplyMovement();
+        if(superSpeed == true)
+        {
+            SuperMovement();
+        }
+        else
+        {
+            ApplyMovement();
+        }
     }
 
     //Method Declarations
@@ -37,6 +47,12 @@ public class PlayerController : MonoBehaviour
 
     rBody.linearVelocity = new Vector2(velocityX, rBody.linearVelocity.y);
     }
+    void SuperMovement()
+    {
+        float velocityX = moveInput.x;
+
+        rBody.linearVelocity = new Vector2(velocityX * 5, rBody.linearVelocity.y);
+    }
     void OnMove(InputValue value)
     {
         moveInput = value.Get<Vector2>();
@@ -44,9 +60,20 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        //Sidequest 1
         if (collision.gameObject.CompareTag("Ground"))
         {
             landExplosion.Play();
+        }       
+
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        //Sidequest 2
+        if (collision.gameObject.name == "Collectable")
+        {
+            superSpeed = true;
         }
     }
 }
