@@ -14,10 +14,11 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rBody; //Field Variable
 
     //Sidequest 1
-    public ParticleSystem landExplosion;
+    [SerializeField] 
+    private ParticleSystem landExplosion; 
 
     //Sidequest 2
-    public bool superSpeed = false;
+    private bool superSpeed = false;
     public int superSpeedDuration;
 
 
@@ -25,10 +26,7 @@ public class PlayerController : MonoBehaviour
     {
         // Initialize
         rBody = GetComponent<Rigidbody2D>();
-        stats = new PlayerStats();
-        
-        
-
+        stats = new PlayerStats(); //moveSpeed is in the 'black box'
     }
 
     void FixedUpdate()
@@ -51,13 +49,12 @@ public class PlayerController : MonoBehaviour
     
     void ApplyMovement()
     {
-      float velocityX = moveInput.x;
+      float velocityX = moveInput.x; // Local variable
 
     rBody.linearVelocity = new Vector2(velocityX, rBody.linearVelocity.y);
     }
     void SuperMovement()
     {
-        //GitHub Error Comment
         StartCoroutine(SupermoveSlowdown());
         float velocityX = moveInput.x;
         rBody.linearVelocity = new Vector2(velocityX * 5, rBody.linearVelocity.y);
